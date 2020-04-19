@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			.active {
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<dev id="app">
+			{{ message }}
+			<ul>
+				<li v-for="(movie, index) in movies" :class="getLiClass(index)" v-on:click="color(index)">
+					{{movie}}
+				</li>
+			</ul>
+			<h6 v-bind:style="{fontSize: '17px', color: 'red'}">{{movies}}</h6>
+		</dev>
+		<script>
+			var app = new Vue({
+				el: "#app",
+				data: {
+					message: "哈哈哈",
+					activeIndex: 0,
+					movies: ['火影忍者', '天线宝宝', '蓝猫淘气三千问', '进击的巨人']
+				},
+				methods: {
+					color: function (num) {
+						this.activeIndex = num
+					},
+					getLiClass: function (num) {
+						return {active: num==this.activeIndex}
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

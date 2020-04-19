@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>父子组件通信</title>
+		<script src="./js/vue.js"></script>
+		<template id="boluoTemplate">
+			<div>
+				<h3>动漫列表</h3>
+				<ul>
+					<li v-for="movieItem in boluomovies" @click="movieClick(movieItem)">
+						{{movieItem}}
+					</li>
+				</ul>
+			</div>
+		</template>
+	</head>
+	<body>
+		<div id="app">
+			<boluo_cpn :boluomovies="movies" @movieclick="showMovie"></boluo_cpn>
+			<!-- <boluo_cpn></boluo_cpn> -->
+		</div>
+		
+		<script>
+			
+			const app = new Vue({
+				el: '#app',
+				data: {
+					message: '菠萝',
+					movies: ['名侦探柯南', '爱迪奥特曼', '蓝猫淘气三千问', '火影忍者']
+				},
+				components: {
+					boluo_cpn: {
+						template: '#boluoTemplate',
+						props: {
+							// 类型限制
+							// boluomovies: Array
+							boluomovies: {
+								type: Array,
+								default: ['默认1', '默认2', '默认3']
+							},
+							// 必传属性 required
+							// 类型  type 
+						},
+						data() {
+							return {
+							}
+						},
+						methods: {
+							movieClick(movieName) {
+								console.log(movieName)
+								// 自定义事件
+								this.$emit('movieclick', movieName)
+							}
+						}
+					}
+				},
+				methods: {
+					showMovie(movieName) {
+						alert(movieName)
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

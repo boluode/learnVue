@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>父子组件</title>
+		<script src="./js/vue.js"></script>
+	</head>
+	<body>
+		<div id = "app">
+			<time_cpn></time_cpn>
+			
+		</div>
+		<script>
+			const timeCpn = Vue.extend({
+				template: `
+				<div>
+					<h1>我是时间组件</h1>
+				</div>
+				`
+			})
+			const tableCpn = Vue.extend({
+				template: `
+				<div>
+					<h1>我是列表组件</h1>
+					<table_time_cpn></table_time_cpn>
+				</div>
+				`,
+				components: {
+					table_time_cpn: timeCpn
+				}
+			})
+			
+			const app = new Vue({
+				el: '#app',
+				data: {
+					
+				},
+				components: {
+					time_cpn: tableCpn
+				}
+			})
+		</script>
+	</body>
+</html>

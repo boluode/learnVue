@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>图书购物车</title>
+		<script src="./js/vue.js"></script>
+	</head>
+	<body>
+		<dev id="app">
+			<dev v-if="books.length > 0">
+				<table>
+					<thead>
+						<tr>
+							<th></th>
+							<th>书籍名称</th>
+							<th>出版日期</th>
+							<th>价格</th>
+							<th>购买数量</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="(bookItem, index) in books">
+							<td>{{bookItem.id}}</td>
+							<td>{{bookItem.name}}</td>
+							<td>{{bookItem.date}}</td>
+							<!-- <td>{{formatPrice(bookItem.price)}}</td> -->
+							<td>{{bookItem.price | showPrice}}</td>
+							<td>
+								<button @click="decrement(index)" v-bind:disabled="bookItem.count < 2">-</button>
+								{{bookItem.count}}
+								<button @click="increment(index)">+</button>
+							</td>
+							<td><button @click="removeBook(index)">移除</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</dev>
+			<h1 v-else>
+				购物车为空
+			</h1>
+			<h2>总价格：{{totalPrice | showPrice}}</h2>
+		</dev>
+		<script>
+			const app = new Vue({
+				el: '#app',
+				data: {
+					books: [
+						{
+							id: 1,
+							name: 'Java讲义',
+							price: 100,
+							count: 1,
+							date: '2020-09'
+						},
+						{
+							id: 2,
+							name: 'Java并发编程艺术',
+							price: 34,
+							count: 1,
+							date: '2020-12'
+						},
+						{
+							id: 3,
+							name: '孤独是生命的礼物',
+							price: 45,
+							count: 1,
+							date: '2020-09'
+						},
+						{
+							id: 4,
+							name: '恨着恨着就爱上了',
+							price: 29,
+							count: 1,
+							date: '2020-09'
+						},
+					]
+				},
+				methods: {
+					formatPrice(price) {
+						return '¥' + price.toFixed(2)
+					},
+					decrement(index) {
+						
+						this.books[index].count--
+					}, 
+					increment(index) {
+						this.books[index].count++
+					},
+					removeBook(index) {
+						this.books.splice(index, 1)
+					}
+				},
+				filters: {
+					showPrice(price) {
+						return '¥' + price.toFixed(2)
+					}
+				},
+				computed: {
+					totalPrice() {
+						let totalPrice = 0
+						/* for(let i = 0; i < this.books.length; i++) {
+							totalPrice += this.books[i].price * this.books[i].count
+						} */
+						/* for(let book of this.books) {
+							totalPrice += book.price * book.count
+						} */
+						/* totalPrice = this.books.filter(function(book) {
+							return book.price>50
+						}).map(function(book) {
+							return book.price * book.count
+						}).reduce(function(prePrice, curPrice) {
+							return prePrice + curPrice
+						}, 0) */
+						totalPrice = this.books.map(book => book.price * book.count).reduce((prePrice, curPrice) => prePrice + curPrice)
+						return totalPrice
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

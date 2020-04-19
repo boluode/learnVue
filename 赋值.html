@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello Vue</title>
+</head>
+
+<body>
+<div id="app" v-cloak>{{ message }}
+    <h6>{{message}} 不覆盖</h6>
+    <h6 v-pre>{{message}} 不覆盖</h6>
+    <h6 v-once>{{message}}</h6>
+    <h6 v-text='message'>-------菠萝覆盖------</h6>
+    {{movies}}
+    <ul>
+        <li v-for="item in movies">{{item}}</li>
+    </ul>
+
+    <h1>当前计数：{{counter}}</h1>
+    <!-- <button v-on:click="counter++">+</button>
+    <button v-on:click="counter--">-</button> -->
+    <button v-on:click="add">+</button>
+    <button v-on:click="sub">-</button>
+    <h4>{{firstName + ' ' + lastName}}</h4>
+    <h4>{{firstName}}  {{lastName}}</h4>
+
+    <h6 v-html='url'></h6>
+    
+</div>
+
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
+<script src="js/vue.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue! 菠萝',
+            movies: ["行尸走肉", "星际穿越", "功夫足球", "盗梦空间"],
+            counter: 0,
+            firstName: '姓',
+            lastName: '名字',
+            url: '<a href="http://www.baidu.com">百度一下</a>'
+        },
+        methods: {
+            add: function() {
+                console.log("add run")
+                this.counter++
+            },
+            sub: function() {
+                console.log("sub run")
+                this.counter--
+            }
+        }
+    })
+</script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>双向绑定</title>
+		<script src="./js/vue.js"></script>
+	</head>
+	<body>
+		<dev id="app">
+			<!-- // v-model 双向绑定  类似于两个操作  v-bind v-on -->
+			<!-- 修饰符 lazy  number  trim -->
+			<input type="text" v-model="message" />
+			<input type="text" :value="message" />
+			{{message}}
+			<br />
+			<h3>radio</h3>
+			<label for="male">
+				<input type="radio" id="male" value="男" v-model="sex" />男
+			</label>
+			<label for="female">
+				<input type="radio" id="female" value="女" v-model="sex" />女
+			</label>
+			<h4>你选择的性别是: {{sex}}</h4>
+			<h3>checkbox</h3>
+			<label for="agree">
+				<input type="checkbox" id="agree" v-model="isAgree" />同意协议
+			</label>
+			<h4>你选择的]是: {{isAgree}}</h4>
+			<button :disabled="!isAgree">下一步</button>
+			<br />
+			
+			<input type="checkbox" value="足球" v-model="hobbies" />足球
+			<input type="checkbox" value="篮球" v-model="hobbies" />篮球
+			<input type="checkbox" value="排球" v-model="hobbies" />排球
+			<input type="checkbox" value="羽毛球" v-model="hobbies" />羽毛球
+			<h4>你的爱好是：{{hobbies}}</h4>
+			<h3>select 单个</h3>
+			<select name="abc" v-model="fruit">
+				<option>橘子</option>
+				<option>苹果</option>
+				<option>香蕉</option>
+				<option>榴莲</option>
+			</select>
+			<h4>你选择的水果：{{fruit}}</h4>
+			
+			<h3>select 多个</h3>
+			<select name="abcs" v-model="fruitList" multiple>
+				<option>橘子</option>
+				<option>苹果</option>
+				<option>香蕉</option>
+				<option>榴莲</option>
+			</select>
+			<h4>你选择的水果：{{fruitList}}</h4>
+			
+			<h3>值绑定</h3>
+			<label v-for="hobbiesItem in originHobbies" :for="hobbiesItem">
+				<input type="checkbox" :value="hobbiesItem" :id="hobbiesItem" v-model="hobbies" />{{hobbiesItem}}
+			</label>
+		</dev>
+		<script>
+			const app = new Vue({
+				el: '#app',
+				data: {
+					message: '菠萝',
+					sex: '男',
+					isAgree: false,
+					hobbies: ['篮球'],
+					fruit: '榴莲',
+					fruitList: ['橘子', '香蕉'],
+					originHobbies: ['足球', '排球', '篮球', '铅球', '台球']
+				}
+			})
+		</script>
+	</body>
+</html>

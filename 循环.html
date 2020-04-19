@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>循环</title>
+		<script src="./js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h4>基本类型数组遍历</h4>
+			<ul>
+				<li v-for="(nameItem, index) in nameList">{{index+1}}.{{nameItem}}</li>
+			</ul>
+			<h4>对象数组遍历</h4>
+			<ul>
+				<li v-for="(value, key, index) in user">
+					{{index+1}}.{{value}}-{{key}}
+				</li>
+			</ul>
+			<h4>数组处理</h4>
+			<ul>
+				<li v-for="letterItem in letters" :key="letterItem">{{letterItem}}</li>
+			</ul>
+			<button @click="push">push</button>
+			<button @click="pop">pop</button>
+			<button @click="shift">shift</button>
+			<button @click="unshift">unshift</button>
+			<button @click="sort">sort</button>
+			<button @click="reverse">reverse</button>
+			<button @click="splice">splice</button>
+			<button @click="set">set</button>
+		</div>
+		
+		<script>
+			const app = new Vue({
+				el: '#app',
+				data: {
+					nameList: ['老大','老二','老三'],
+					user: {
+						name: "老大", 
+						age: 15
+					},
+					// 直接通过数组下标修改，不能响应
+					letters: ['A', 'B', 'C', 'D', 'E']
+				},
+				methods: {
+					push() {
+						this.letters.push('push')
+					}, 
+					pop() {
+						// 删除数组最后一个
+						this.letters.pop()
+					}, 
+					shift() {
+						// 删除数组中的第一个元素
+						this.letters.shift()
+					}, 
+					unshift() {
+						// 数组前面添加
+						this.letters.unshift('unshift')
+					}, 
+					sort() {
+						this.letters.sort()
+					}, 
+					reverse() {
+						this.letters.reverse()
+					}, 
+					splice() {
+						this.letters.splice(2, 0, 'splice')
+					}, 
+					set() {
+						Vue.set(this.letters, 0, 'set')
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

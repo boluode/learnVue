@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>组件</title>
+		<script src="./js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<my-componentconstructor></my-componentconstructor>
+			
+			<my-static></my-static>
+			
+			<mycpn></mycpn>
+		</div>
+		<script>
+			// 创建组件构造器对象
+			const componentConstructor = Vue.extend({
+				template: `
+				<div>
+					<h1>我是标题</h1>
+					<p>我是内容，哈哈哈哈</p>
+					<p>我是内容，呵呵呵呵</p>
+				</div>
+				`
+			})
+			// 注册组件
+			Vue.component('my-componentconstructor', componentConstructor)
+			
+			// 全局组件
+			const staticCpn = Vue.extend({
+				template: `
+				<div>
+					<h1>我是全局组件</h1>
+				</div>
+				`
+			})
+			Vue.component('my-static', staticCpn)
+			
+			const localcpn = Vue.extend({
+				template: `
+				<div>
+					<h1>我是局部组件</h1>
+				</div>
+				`
+			})
+			const app = new Vue({
+				el: '#app',
+				data: {
+					message: '菠萝'
+				},
+				components: {
+					mycpn: localcpn
+				}
+			})
+		</script>
+	</body>
+</html>

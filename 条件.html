@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>条件学习</title>
+		<script src="./js/vue.js"></script>
+	</head>
+	<body>
+		<dev id="app">
+			<span v-if="isUser">
+				<label>账号登录：</label>
+				<input key='userInfo' id="userInfo" placeholder="请输入账号" />
+			</span>
+			<span v-else>
+				<label>手机登录：</label>
+				<input key='mobile' id="mobile" placeholder="请输入手机号" />
+			</span>
+			<button @click="change">切换登录</button>
+			<br />
+			
+			<h2 v-if="show">{{message}}</h2>
+			<h2 v-show="show">{{message}}</h2>
+		</dev>
+		<script>
+			const app = new Vue({
+				el: '#app',
+				data: {
+					isUser: true,
+					message: '菠萝',
+					show: true
+				},
+				methods: {
+					change() {
+						this.isUser = !this.isUser
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

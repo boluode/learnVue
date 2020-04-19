@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>属性</title>
+		<script src="js/vue.js"></script>
+		<style>
+			.active {
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<dev id="app">
+			<a v-bind:href="aHref">百度一下</a>
+			<a :href="aHref" class="active">百度一下</a>
+			
+			<h3 class="title" v-bind:class="{active: isActive, line: isLine}">{{message}}</h3>
+			<h3 class="title" v-bind:class="getClasses()">{{message}}</h3>
+			<button v-on:click="color">变色</button>
+			<img v-bind:src="imgUrl" />
+			<img :src="imgUrl" />
+		</dev>
+		
+		<script>
+			const app = new Vue({
+				el: '#app',
+				data: {
+					message: '菠萝',
+					imgUrl: 'https://img10.360buyimg.com/pop/s1180x940_jfs/t1/110538/9/12537/54604/5e96e22fE21d4933d/931f8bee9546baf4.jpg.webp',
+					aHref: 'http://www.baidu.com',
+					isActive: true,
+					isLine: true
+				},
+				methods: {
+					color: function () {
+						this.isActive = !this.isActive
+					},
+					getClasses: function () {
+						return {active: !this.isActive, line: !this.isLine}
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
